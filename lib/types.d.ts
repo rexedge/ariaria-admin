@@ -1,0 +1,157 @@
+interface INavLink {
+	className?: string;
+	title: string;
+	href?: string;
+	icon?: React.ReactNode;
+	sub?: INavLinkSub[];
+	onClick?: () => void;
+}
+
+interface INavLinkSub {
+	title: string;
+	href?: string;
+	image: string | any;
+	description?: string;
+}
+
+interface INavAction {
+	title: string;
+	icon?: React.ReactNode;
+	onClick?: () => void;
+}
+
+interface IImage {
+	id: number;
+	src: string;
+	heading: React.ReactNode;
+}
+interface ICart {
+	products: IStoreProduct[];
+}
+
+interface IProduct {
+	image: StaticImageData | string;
+	name: string;
+	price: number;
+	discountPercent?: number;
+	discountPrice?: number;
+	category?: string;
+	subCategory?: string[];
+}
+interface IReview {
+	author: string; // The name of the reviewer
+	date: string; // The date the review was posted
+	rating: number; // The rating given by the reviewer (e.g., 1 to 5 stars)
+	comment: string; // The review comment or feedback
+}
+
+interface IStoreProduct {
+	id?: number;
+	productId?: string;
+	image: string[];
+	name: string;
+	price: number;
+	brand?: string;
+	size?: string;
+	color?: string;
+	description?: string;
+	discountPercent?: number;
+	discountPrice?: number;
+	stock?: number;
+	stockOption?: 'limited' | 'unlimited';
+	status?: 'active' | 'inactive';
+	reviews?: IReview[];
+	category?: string;
+	subCategory?: string[];
+	tags?: string[];
+}
+interface INotificationItem {
+	id?: string;
+	type:
+		| 'payment-successful'
+		| 'payment-failed'
+		| 'order-delivered'
+		| 'order-canceled'
+		| 'review-order';
+	order: IOrderItem;
+	message?: string;
+	date: string;
+	image: string;
+}
+interface IOrderItem {
+	id: string;
+	delivery: 'home-delivery' | 'pick-up';
+	status: 'pending' | 'successful' | 'failed' | 'awaiting';
+	products: IStoreProduct[];
+	date: string;
+	profile: {
+		email: string;
+		phone: string;
+		address: string;
+	};
+}
+interface IAddressItemProps {
+	address: string;
+	phone: string;
+}
+
+interface IFooterItemLink {
+	name: string;
+	link: string;
+	icon?: React.ReactNode;
+}
+
+interface IFooterItemsProps {
+	links?: IFooterItemLink[];
+	title?: string;
+}
+
+interface ISocialMediaProps {
+	name: string;
+	link: string;
+	icon: React.ReactNode;
+}
+
+interface IPasswordField {
+	placeholder: string;
+}
+
+interface IFilter {
+	field: string;
+	value: string;
+}
+
+interface ISearchParams {
+	query: string;
+	sortBy: 'ascending' | 'descending';
+	category?: string;
+	price?: string;
+	ratings?: string;
+}
+
+interface IUser {
+	admin_id: string;
+	blacklisted: boolean;
+	createdAt: string;
+	email: string;
+	exp?: number;
+	iat?: number;
+	id: number;
+	image: string;
+	name: string;
+	password: string;
+	phone: string;
+	role: string;
+	updatedAt: string;
+	user_type?: string;
+}
+
+interface ICategory {
+	title: string;
+	image?: StaticImageData | string;
+}
+
+interface ISubcategory {
+	title: string;
+	image?: StaticImageData | string;
+}
