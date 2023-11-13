@@ -155,3 +155,14 @@ interface ISubcategory {
 	title: string;
 	image?: StaticImageData | string;
 }
+interface DataTableProps<TData, TValue> {
+	columns: ColumnDef<TData, TValue>[];
+	data: TData[];
+	showSearch?: boolean;
+	showColumns?: boolean;
+	searchWith?: string;
+	searchWithPlaceholder?: string;
+	showPagination?: boolean;
+	showSelected?: boolean;
+	showRowsPerPage?: boolean;
+}
