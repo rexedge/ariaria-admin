@@ -1,30 +1,17 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import {
 	DropdownMenu,
 	DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
 import { ColumnDef } from '@tanstack/react-table';
-import { EyeIcon, MoreHorizontal, MoreVertical } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
 import { DataTableColumnHeader } from './data-column-table-header';
-import {
-	OrderCancelIcon,
-	OrderCloseIcon,
-	OrderConfirmIcon,
-	deleteIcon,
-	editIcon,
-	paymentIcon,
-	printIcon,
-} from '@/lib/icons';
-import Link from 'next/link';
-import { Dialog, DialogContent, DialogFooter, DialogTrigger } from '../dialog';
+import { OrderCancelIcon, OrderCloseIcon, OrderConfirmIcon } from '@/lib/icons';
 import Image from 'next/image';
 
 export const ordersColumn: ColumnDef<IOrderItem>[] = [
@@ -111,11 +98,30 @@ export const ordersColumn: ColumnDef<IOrderItem>[] = [
 	},
 	{
 		accessorKey: 'status',
-		header: () => <div className='text-right'>Status</div>,
+		header: () => <div className='flex items-center '>Status</div>,
 		cell: ({ row }) => {
 			const order = row.original;
+			const success =
+				'text-awesome-foreground bg-awesome/50 hover:bg-awesome/30';
+			const failed =
+				'text-destructive bg-destructive/30 hover:bg-destructive/20';
+			const pending = 'text-blue-700 bg-blue-300 hover:bg-blue-200';
+			const awaiting =
+				'text-primary bg-primary/40 hover:bg-primary/20';
 			return (
-				<div className='text-right font-medium'>{order.status}</div>
+				<Button
+					className={`font-light capitalize w-28 ${
+						order.status === 'successful'
+							? success
+							: order.status === 'pending'
+							? pending
+							: order.status === 'failed'
+							? failed
+							: awaiting
+					}`}
+				>
+					{order.status}
+				</Button>
 			);
 		},
 	},

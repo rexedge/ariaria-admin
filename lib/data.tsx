@@ -446,6 +446,7 @@ export const ALL_PRODUCTS: IStoreProduct[] = [
 				comment: 'This is a not what I was expecting',
 			},
 		],
+		tags: ['ladies', 'skirt', 'garri', 'groundnut'],
 	},
 	{
 		image: [
@@ -700,7 +701,7 @@ export const ORDERS: IOrderItem[] = [
 	{
 		id: '01',
 		delivery: 'home-delivery',
-		status: 'successful',
+		status: 'awaiting',
 		products: ALL_PRODUCTS.slice(0, 2),
 		date: '15-05-1995',
 		profile: {
@@ -712,7 +713,7 @@ export const ORDERS: IOrderItem[] = [
 	{
 		id: '01',
 		delivery: 'home-delivery',
-		status: 'successful',
+		status: 'failed',
 		products: ALL_PRODUCTS.slice(0, 2),
 		date: '15-05-1995',
 		profile: {
@@ -724,7 +725,7 @@ export const ORDERS: IOrderItem[] = [
 	{
 		id: '01',
 		delivery: 'home-delivery',
-		status: 'successful',
+		status: 'pending',
 		products: ALL_PRODUCTS.slice(0, 2),
 		date: '15-05-1995',
 		profile: {

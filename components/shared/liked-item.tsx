@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import * as Icons from '@/lib/icons';
-import { formatToNaira, slugify } from '@/lib/utils';
+import { formatToNaira } from '@/lib/utils';
 import { Button } from '../ui/button';
 
 export default function LikedItem({ product }: { product: IStoreProduct }) {
