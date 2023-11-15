@@ -1564,6 +1564,7 @@ export const DownloadIcon = () => (
 		viewBox='0 0 24 24'
 		fill='none'
 		xmlns='http://www.w3.org/2000/svg'
+		className='h-4 w-4'
 	>
 		<path
 			d='M9.32031 11.6797L11.8803 14.2397L14.4403 11.6797'
@@ -1588,21 +1589,6 @@ export const DownloadIcon = () => (
 			strokeMiterlimit='10'
 			strokeLinecap='round'
 			strokeLinejoin='round'
-		/>
-	</svg>
-);
-export const addIcon = (
-	<svg
-		xmlns='http://www.w3.org/2000/svg'
-		width='24'
-		height='25'
-		viewBox='0 0 24 25'
-		fill='none'
-		className='h-full w-full object-contain'
-	>
-		<path
-			d='M21.75 10.25H14.25V2.75C14.25 2.15326 14.0129 1.58097 13.591 1.15901C13.169 0.737053 12.5967 0.5 12 0.5C11.4033 0.5 10.831 0.737053 10.409 1.15901C9.98705 1.58097 9.75 2.15326 9.75 2.75V10.25H2.25C1.65326 10.25 1.08097 10.4871 0.65901 10.909C0.237053 11.331 0 11.9033 0 12.5C0 13.0967 0.237053 13.669 0.65901 14.091C1.08097 14.5129 1.65326 14.75 2.25 14.75H9.75V22.25C9.75 22.8467 9.98705 23.419 10.409 23.841C10.831 24.2629 11.4033 24.5 12 24.5C12.5967 24.5 13.169 24.2629 13.591 23.841C14.0129 23.419 14.25 22.8467 14.25 22.25V14.75H21.75C22.3467 14.75 22.919 14.5129 23.341 14.091C23.7629 13.669 24 13.0967 24 12.5C24 11.9033 23.7629 11.331 23.341 10.909C22.919 10.4871 22.3467 10.25 21.75 10.25Z'
-			fill='currentColor'
 		/>
 	</svg>
 );
@@ -1653,7 +1639,6 @@ export const eyesOpenIcon = (
 		/>
 	</svg>
 );
-
 export const eyesCloseIcon = (
 	<svg
 		width='30'
@@ -1669,7 +1654,6 @@ export const eyesCloseIcon = (
 		/>
 	</svg>
 );
-
 export const dashboardIcon = (
 	<svg
 		width='26'
@@ -1689,7 +1673,6 @@ export const dashboardIcon = (
 		/>
 	</svg>
 );
-
 export const agentsIcon = (
 	<svg
 		width='26'
@@ -1705,7 +1688,6 @@ export const agentsIcon = (
 		/>
 	</svg>
 );
-
 export const driverIcon = (
 	<svg
 		width='26'
@@ -1723,7 +1705,6 @@ export const driverIcon = (
 		/>
 	</svg>
 );
-
 export const heavyVehiclesIcon = (
 	<svg
 		width='26'
@@ -1739,7 +1720,6 @@ export const heavyVehiclesIcon = (
 		/>
 	</svg>
 );
-
 export const finesIcon = (
 	<svg
 		width='26'
@@ -1755,7 +1735,6 @@ export const finesIcon = (
 		/>
 	</svg>
 );
-
 export const revenueIcon = (
 	<svg
 		width='26'
@@ -1771,7 +1750,6 @@ export const revenueIcon = (
 		/>
 	</svg>
 );
-
 export const settingsIcon = (
 	<svg
 		width='26'
@@ -1787,7 +1765,6 @@ export const settingsIcon = (
 		/>
 	</svg>
 );
-
 export const notificationIcon = (
 	<svg
 		width='27'
@@ -1811,7 +1788,6 @@ export const notificationIcon = (
 		/>
 	</svg>
 );
-
 export const searchIcon = (
 	<svg
 		width='26'
@@ -1827,7 +1803,6 @@ export const searchIcon = (
 		/>
 	</svg>
 );
-
 export const peopleIcon = (
 	<svg
 		width='26'
@@ -1849,7 +1824,6 @@ export const peopleIcon = (
 		/>
 	</svg>
 );
-
 export const deleteIcon = (
 	<svg
 		width='24'
@@ -1865,7 +1839,6 @@ export const deleteIcon = (
 		/>
 	</svg>
 );
-
 export const editIcon = (
 	<svg
 		width='24'
@@ -1883,7 +1856,6 @@ export const editIcon = (
 		/>
 	</svg>
 );
-
 export const paymentIcon = (
 	<svg
 		width='31'
@@ -1899,7 +1871,6 @@ export const paymentIcon = (
 		/>
 	</svg>
 );
-
 export const passwordIcon = (
 	<svg
 		width='30'
@@ -1920,7 +1891,6 @@ export const passwordIcon = (
 		/>
 	</svg>
 );
-
 export const backArrowIcon = (
 	<svg
 		width='18'
@@ -1944,7 +1914,6 @@ export const backArrowIcon = (
 		/>
 	</svg>
 );
-
 export const TickBox = (
 	<svg
 		width='50'
@@ -1959,7 +1928,6 @@ export const TickBox = (
 		/>
 	</svg>
 );
-
 export const dotsIcon = (
 	<svg
 		width='6'
@@ -1985,7 +1953,6 @@ export const dotsIcon = (
 		/>
 	</svg>
 );
-
 export const driversProgressIcon1 = (
 	<svg
 		width='340'
@@ -2059,7 +2026,6 @@ export const driversProgressIcon1 = (
 		/>
 	</svg>
 );
-
 export const driversProgressIcon2 = (
 	<svg
 		width='340'
@@ -2130,7 +2096,6 @@ export const driversProgressIcon2 = (
 		/>
 	</svg>
 );
-
 export const driversProgressIcon3 = (
 	<svg
 		width='340'
@@ -2195,7 +2160,6 @@ export const driversProgressIcon3 = (
 		<path d='M340 40C340 62.0914 322.091 80 300 80C277.909 80 260 62.0914 260 40C260 17.9086 277.909 0 300 0C322.091 0 340 17.9086 340 40ZM270.054 40C270.054 56.5388 283.461 69.9462 300 69.9462C316.539 69.9462 329.946 56.5388 329.946 40C329.946 23.4612 316.539 10.0538 300 10.0538C283.461 10.0538 270.054 23.4612 270.054 40Z' />
 	</svg>
 );
-
 export const filterIcon = (
 	<svg
 		width='16'
@@ -2211,7 +2175,6 @@ export const filterIcon = (
 		/>
 	</svg>
 );
-
 export const successIcon = (
 	<svg
 		width='132'
@@ -2238,7 +2201,6 @@ export const successIcon = (
 		/>
 	</svg>
 );
-
 export const failureIcon = (
 	<svg
 		width='132'
@@ -2265,7 +2227,6 @@ export const failureIcon = (
 		/>
 	</svg>
 );
-
 export const upIcon = (
 	<svg
 		width='9'
@@ -2288,7 +2249,6 @@ export const upIcon = (
 		/>
 	</svg>
 );
-
 export const downIcon = (
 	<svg
 		width='9'
@@ -2311,7 +2271,6 @@ export const downIcon = (
 		/>
 	</svg>
 );
-
 export const dashIcon = (
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
@@ -2328,7 +2287,6 @@ export const dashIcon = (
 		/>
 	</svg>
 );
-
 export const printIcon = (
 	<svg
 		width='20'
@@ -2344,7 +2302,6 @@ export const printIcon = (
 		/>
 	</svg>
 );
-
 export const scanIcon = (
 	<svg
 		width='24'
@@ -2360,7 +2317,6 @@ export const scanIcon = (
 		/>
 	</svg>
 );
-
 export const agentDriverIcon = (
 	<svg
 		width='32'
@@ -2378,7 +2334,6 @@ export const agentDriverIcon = (
 		/>
 	</svg>
 );
-
 export const refundIcon = (
 	<svg
 		width='26'
@@ -2409,7 +2364,6 @@ export const refundIcon = (
 		/>
 	</svg>
 );
-
 export const copyIcon = (
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
@@ -2460,7 +2414,6 @@ export const adminIcon = (
 		/>
 	</svg>
 );
-
 export const homeIcon = (
 	<svg
 		width='24'
@@ -2476,7 +2429,6 @@ export const homeIcon = (
 		/>
 	</svg>
 );
-
 export const profileIcon = (
 	<svg
 		width='30'
@@ -2492,7 +2444,6 @@ export const profileIcon = (
 		/>
 	</svg>
 );
-
 export const securityIcon = (
 	<svg
 		width='20'
@@ -2508,7 +2459,6 @@ export const securityIcon = (
 		/>
 	</svg>
 );
-
 export const aboutIcon = (
 	<svg
 		width='24'
@@ -2524,7 +2474,6 @@ export const aboutIcon = (
 		/>
 	</svg>
 );
-
 export const loadingSpinner = (
 	<svg
 		className='animate-spin h-6 w-6 object-contain'

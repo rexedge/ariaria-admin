@@ -27,7 +27,6 @@ export default function DatePicker() {
 						!date && 'text-muted-foreground'
 					)}
 				>
-					<CalendarIcon className='mr-2 h-4 w-4' />
 					{date?.from ? (
 						date.to ? (
 							<>
@@ -40,6 +39,7 @@ export default function DatePicker() {
 					) : (
 						<span>Pick a date</span>
 					)}
+					<CalendarIcon className='ml-2 h-4 w-4' />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className='w-auto p-0'>

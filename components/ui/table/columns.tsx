@@ -160,6 +160,93 @@ export const ordersColumn: ColumnDef<IOrderItem>[] = [
 		},
 	},
 ];
+export const customersColumn: ColumnDef<ICustomer>[] = [
+	{
+		accessorKey: 'name',
+		header: ({ column }) => (
+			<DataTableColumnHeader
+				column={column}
+				title="Customer's Name"
+			/>
+		),
+		cell: ({ row }) => {
+			const customer = row.original;
+			return <div className=''>{customer.name}</div>;
+		},
+		sortDescFirst: true,
+	},
+	{
+		accessorKey: 'email',
+		header: ({ column }) => (
+			<DataTableColumnHeader
+				column={column}
+				title='Email Address'
+			/>
+		),
+		cell: ({ row }) => {
+			const customer = row.original;
+			return <div>{customer.email}</div>;
+		},
+		sortDescFirst: true,
+	},
+	{
+		accessorKey: 'phone',
+		header: ({ column }) => (
+			<DataTableColumnHeader
+				column={column}
+				title='Phone Number'
+			/>
+		),
+		cell: ({ row }) => {
+			const customer = row.original;
+			return <div>{customer.phone}</div>;
+		},
+		sortDescFirst: true,
+	},
+	{
+		accessorKey: 'orders',
+		header: ({ column }) => (
+			<DataTableColumnHeader
+				column={column}
+				title='Orders'
+			/>
+		),
+		cell: ({ row }) => {
+			const customer = row.original;
+			return <div>{customer.orders.length}</div>;
+		},
+		sortDescFirst: true,
+	},
+	{
+		accessorKey: 'registrationDate',
+		header: ({ column }) => (
+			<DataTableColumnHeader
+				column={column}
+				title='Registration Date'
+			/>
+		),
+		cell: ({ row }) => {
+			const customer = row.original;
+			return <div>{customer.registrationDate}</div>;
+		},
+		sortDescFirst: true,
+	},
+	{
+		id: 'actions',
+		cell: ({ row }) => {
+			const customer = row.original;
+
+			return (
+				<Button
+					size='icon'
+					variant='ghost'
+				>
+					<OrderCancelIcon />
+				</Button>
+			);
+		},
+	},
+];
 // export const paymentColumns: ColumnDef<IVehiclePayment>[] = [
 // 	{
 // 		accessorKey: 'transaction_date',

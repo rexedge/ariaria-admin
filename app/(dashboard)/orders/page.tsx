@@ -7,6 +7,14 @@ import { ordersColumn } from '@/components/ui/table/columns';
 
 export default function OrderPage() {
 	const orders = ORDERS;
+	const pendingOrders = ORDERS.filter((order) => order.status === 'pending');
+	const failedOrders = ORDERS.filter((order) => order.status === 'failed');
+	const awaitingOrders = ORDERS.filter(
+		(order) => order.status === 'awaiting'
+	);
+	const successfulOrders = ORDERS.filter(
+		(order) => order.status === 'successful'
+	);
 	return (
 		<div className='flex flex-col gap-5'>
 			<div className='flex justify-between'>
@@ -25,18 +33,21 @@ export default function OrderPage() {
 					defaultValue='all'
 					className=''
 				>
-					<TabsList className='grid w-full max-w-lg grid-cols-4 border'>
+					<TabsList className='grid w-full max-w-xl grid-cols-5 border'>
 						<TabsTrigger value='all'>All</TabsTrigger>
 						<TabsTrigger value='pending'>Pending</TabsTrigger>
 						<TabsTrigger value='successful'>
 							Successful
+						</TabsTrigger>
+						<TabsTrigger value='awaiting'>
+							Awaiting
 						</TabsTrigger>
 						<TabsTrigger value='failed'>Failed</TabsTrigger>
 					</TabsList>
 					<TabsContent value='all'>
 						<DataTable
 							showSearch
-							searchWith='name'
+							searchWith='status'
 							searchWithPlaceholder='Search with name'
 							showColumns
 							showPagination
@@ -45,13 +56,48 @@ export default function OrderPage() {
 						/>
 					</TabsContent>
 					<TabsContent value='pending'>
-						Pending... ... ... ... ...
+						<DataTable
+							showSearch
+							searchWith='status'
+							searchWithPlaceholder='Search with name'
+							showColumns
+							showPagination
+							columns={ordersColumn}
+							data={pendingOrders || []}
+						/>
 					</TabsContent>
 					<TabsContent value='successful'>
-						Successful... ... ... ... ...
+						<DataTable
+							showSearch
+							searchWith='status'
+							searchWithPlaceholder='Search with name'
+							showColumns
+							showPagination
+							columns={ordersColumn}
+							data={successfulOrders || []}
+						/>
+					</TabsContent>
+					<TabsContent value='awaiting'>
+						<DataTable
+							showSearch
+							searchWith='status'
+							searchWithPlaceholder='Search with name'
+							showColumns
+							showPagination
+							columns={ordersColumn}
+							data={awaitingOrders || []}
+						/>
 					</TabsContent>
 					<TabsContent value='failed'>
-						Failed... ... ... ... ...
+						<DataTable
+							showSearch
+							searchWith='status'
+							searchWithPlaceholder='Search with name'
+							showColumns
+							showPagination
+							columns={ordersColumn}
+							data={failedOrders || []}
+						/>
 					</TabsContent>
 				</Tabs>
 			</div>

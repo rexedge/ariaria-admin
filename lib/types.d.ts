@@ -166,3 +166,36 @@ interface DataTableProps<TData, TValue> {
 	showSelected?: boolean;
 	showRowsPerPage?: boolean;
 }
+interface ICustomer {
+	id: number;
+	customerId: string;
+	name: string;
+	email: string;
+	phone: string;
+	orders: IOrderItem[];
+	registrationDate: string;
+}
+interface IStatistics {
+	name: string;
+	number: number;
+	data: {
+		name: string;
+		value: number;
+	}[];
+}
+interface IDropdownItem {
+	label: string;
+	href: string;
+	icon: ReactNode;
+}
+
+interface IMyDropdownProps {
+	items: DropdownItem[];
+	label: string;
+}
+interface IStatisticsCardChartProps {
+	data: {
+		name: string;
+		value: number;
+	}[];
+}
