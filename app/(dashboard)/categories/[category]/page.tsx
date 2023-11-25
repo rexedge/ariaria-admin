@@ -1,5 +1,4 @@
 import React from 'react';
-import { getCategoryById, getSubCategories } from '@/app/api/categories';
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/layout/breadcrumb';
 import { FilledMarketPlaceIcon, MoreIcon } from '@/lib/icons';
@@ -16,6 +15,10 @@ import UpdateCategory from '@/components/pages/admin/update-category';
 import AddSubcategory from '@/components/pages/admin/add-subcategory';
 import UpdateSubcategory from '@/components/pages/admin/update-subcategory';
 import DeleteSubcategory from '@/components/pages/admin/delete-subcategory';
+import {
+	getCategoryById,
+	getSubcategoriesByCategoryId,
+} from '@/lib/controller/categories-controller';
 
 export default async function CategoryPage({
 	params,
@@ -24,7 +27,8 @@ export default async function CategoryPage({
 }) {
 	const category = await getCategoryById(params.category);
 	if (!category) return notFound();
-	const subcategories = await getSubCategories();
+	const sc = await getSubcategoriesByCategoryId(params.category);
+	const subcategories: ISubcategory[] = [];
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>

@@ -20,7 +20,7 @@ interface INavAction {
 	onClick?: () => void;
 }
 
-interface IImage {
+interface IHeroItem {
 	id: number;
 	src: string;
 	heading: React.ReactNode;
@@ -147,8 +147,16 @@ interface IUser {
 }
 
 interface ICategory {
+	id: 5;
+	store_category_id: string;
+	store_id: string;
 	title: string;
-	image?: StaticImageData | string;
+	description: string;
+	image: string;
+	status: string;
+	deleted: boolean;
+	createdAt: string;
+	updatedAt: string;
 }
 
 interface ISubcategory {
@@ -198,4 +206,65 @@ interface IStatisticsCardChartProps {
 		name: string;
 		value: number;
 	}[];
+}
+
+interface IStore {
+	id: number;
+	store_id: string;
+	name: string;
+	description?: string;
+	link: string;
+	store_url: string;
+	image?: string;
+	user_id: string;
+	user_type?: string;
+	type?: string;
+	currency: string;
+	lang: string;
+	status: string;
+	deleted: boolean;
+	createdAt: string;
+	updatedAt: string;
+}
+
+interface ICategoriesRes {
+	success: boolean;
+	message: string;
+	data: {
+		store: {
+			id: number;
+			store_id: string;
+			name: string;
+			description?: string;
+			link: string;
+			store_url: string;
+			image?: string;
+			user_id: string;
+			user_type?: string;
+			type?: string;
+			currency: string;
+			lang: string;
+			status: string;
+			deleted: boolean;
+			createdAt: string;
+			updatedAt: string;
+			tbl_store_categories: ICategory[];
+		};
+	};
+}
+
+interface ICategoryRes {
+	success: boolean;
+	message: string;
+	data: { store: ICategory };
+}
+
+interface IImage {
+	name: string;
+	url: string;
+	business_id?: string;
+	createdAt?: string;
+	id?: number | string;
+	image_id?: string;
+	updatedAt?: string;
 }

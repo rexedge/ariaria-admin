@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { v4 as uuidv4 } from 'uuid';
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -157,3 +158,9 @@ export function formatDate(date: Date): string {
 	const dayWithOrdinal = addOrdinalSuffix(parseInt(day));
 	return `${dayWithOrdinal} ${month}, ${year}`;
 }
+
+export const generateUniqueID = (): string => {
+	const id = uuidv4();
+	console.log(id);
+	return id;
+};

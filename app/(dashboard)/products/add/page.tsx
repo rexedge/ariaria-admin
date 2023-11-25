@@ -1,5 +1,9 @@
-import { getCategories, getSubcategoryById } from '@/app/api/categories';
+// import { getCategories, getSubcategoryById } from '@/app/api/categories';
 import NewProductForm from '@/components/forms/add-products';
+import {
+	getCategories,
+	getSubcategoriesByCategoryId,
+} from '@/lib/controller/categories-controller';
 import Image from 'next/image';
 import React from 'react';
 
@@ -8,7 +12,11 @@ export default async function AddProductPage({
 }: {
 	searchParams: { category: string; subcategory: string };
 }) {
-	const subcategory = await getSubcategoryById(searchParams.subcategory);
+	// const subcategory = await getSubcategoryById(searchParams.subcategory);
+	// const categories = await getCategories();
+	const subcategory = await getSubcategoriesByCategoryId(
+		searchParams.subcategory
+	);
 	const categories = await getCategories();
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>

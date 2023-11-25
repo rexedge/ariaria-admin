@@ -21,7 +21,7 @@ export default function AddCategory() {
 					<span className='hidden lg:flex'>Add Category</span>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className='w-[90vw] max-w-md'>
+			<DialogContent className='w-[90vw] max-w-md p-0'>
 				<DialogHeader>
 					<DialogTitle className='h-14 flex items-center justify-center border-b'>
 						Add A Category

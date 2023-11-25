@@ -1,32 +1,6 @@
 import React from 'react';
 import * as Icons from '@/lib/icons';
 
-export const CATEGORIES = [
-	{
-		title: 'Fashion And Apparel',
-		image: '/category-grids/fashion.jpg',
-	},
-	{
-		title: 'Gadgets',
-		image: '/category-grids/gadgets.jpg',
-	},
-	{
-		title: 'Home And Furniture',
-		image: '/category-grids/home.jpg',
-	},
-	{
-		title: 'Books and Media',
-		image: '/category-grids/books.jpg',
-	},
-	{
-		title: 'Groceries and Food',
-		image: '/category-grids/groceries.jpg',
-	},
-	{
-		title: 'Beauty and Personal Care',
-		image: '/category-grids/beauty.jpg',
-	},
-];
 export const NAV_BAR_LINKS: INavLink[] = [
 	{
 		title: 'Home',
@@ -35,14 +9,14 @@ export const NAV_BAR_LINKS: INavLink[] = [
 	{
 		title: 'Category',
 		href: '/category',
-		sub: CATEGORIES,
+		// sub: CATEGORIES,
 	},
 	{
 		title: 'About Us',
 		href: '/about-us',
 	},
 ];
-export const HERO_ITEMS: IImage[] = [
+export const HERO_ITEMS: IHeroItem[] = [
 	{
 		id: 1,
 		src: '/woman-shopping.png',
@@ -1717,3 +1691,20 @@ export const STATISTICS_DROPDOWN_ITEMS = [
 	{ label: 'Doc', href: '/', icon: <Icons.DownloadIcon /> },
 	{ label: 'Excel', href: '/', icon: <Icons.DownloadIcon /> },
 ];
+// API ENDPOINT URLS
+export const BASE_URL = 'https://lobster-app-wxw8t.ondigitalocean.app';
+export const ENDPOINTS = {
+	auth: {
+		login: '/api/stores/owner/login', // POST
+		reset: '/api/stores/owner/change-password', // POST
+	},
+	main: {
+		store: '/api/stores/',
+	},
+	categories: {
+		all: '/api/stores/category',
+	},
+	subcategories: {
+		all: '',
+	},
+};

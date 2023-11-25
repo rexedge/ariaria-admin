@@ -1,9 +1,9 @@
 import React from 'react';
-import {
-	getCategoryById,
-	getSubCategories,
-	getSubcategoryById,
-} from '@/app/api/categories';
+// import {
+// 	getCategoryById,
+// 	getSubCategories,
+// 	getSubcategoryById,
+// } from '@/app/api/categories';
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/layout/breadcrumb';
 import { FilledMarketPlaceIcon, MoreIcon } from '@/lib/icons';
@@ -27,7 +27,10 @@ export default async function SubcategoryPage({
 }: {
 	params: { category: string; subcategory: string };
 }) {
-	const subcategory = await getSubcategoryById(params.subcategory);
+	// const subcategory = await getSubcategoryById(params.subcategory);
+	const subcategory: ISubcategory = {
+		title: 'SUBCATEGORY_TEST',
+	};
 	if (!subcategory) return notFound();
 	const products = await getProducts();
 	return (

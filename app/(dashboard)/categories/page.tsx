@@ -1,8 +1,6 @@
 import { FilledMarketPlaceIcon, MoreIcon } from '@/lib/icons';
 import React from 'react';
-import { getCategories } from '@/app/api/categories';
 import Link from 'next/link';
-import { slugify } from '@/lib/utils';
 import Image from 'next/image';
 import {
 	DropdownMenu,
@@ -14,6 +12,7 @@ import Breadcrumb from '@/components/layout/breadcrumb';
 import AddCategory from '@/components/pages/admin/add-category';
 import UpdateCategory from '@/components/pages/admin/update-category';
 import DeleteCategory from '@/components/pages/admin/delete-category';
+import { getCategories } from '@/lib/controller/categories-controller';
 
 export default async function CategoriesPage() {
 	const categories = await getCategories();
@@ -50,7 +49,7 @@ export default async function CategoriesPage() {
 							key={b}
 						>
 							<Link
-								href={`/categories/${slugify(a.title)}`}
+								href={`/categories/${a.store_category_id}`}
 							>
 								<Image
 									src={a.image}

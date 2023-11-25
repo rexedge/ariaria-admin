@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSubcategoryById } from '@/app/api/categories';
+// import { getSubcategoryById } from '@/app/api/categories';
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/layout/breadcrumb';
 import { FilledMarketPlaceIcon, MoreIcon } from '@/lib/icons';

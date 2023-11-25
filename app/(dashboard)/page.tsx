@@ -105,7 +105,7 @@ export default function AdminDashboard() {
 						</div>
 					</div>
 				</div>
-				<div className='bg-white w-full lg:w-4/12 xl:w-3/12 h-full rounded-2xl'>
+				<div className='hidden md:block bg-white w-full lg:w-4/12 xl:w-3/12 h-full rounded-2xl'>
 					<div className='flex flex-col item-center justify-between p-3'>
 						<div className='font-libre font-bold text-xl mb-5'>
 							Recent Orders
@@ -135,5 +135,3 @@ export default function AdminDashboard() {
 		</div>
 	);
 }
-
-// general IT consultancy, Web Development
