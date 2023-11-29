@@ -1,9 +1,4 @@
 import React from 'react';
-// import {
-// 	getCategoryById,
-// 	getSubCategories,
-// 	getSubcategoryById,
-// } from '@/app/api/categories';
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/layout/breadcrumb';
 import { FilledMarketPlaceIcon, MoreIcon } from '@/lib/icons';
@@ -21,23 +16,40 @@ import { Button } from '@/components/ui/button';
 import { EditIcon, PlusIcon, TrashIcon } from 'lucide-react';
 import UpdateSubcategory from '@/components/pages/admin/update-subcategory';
 import AddSubcategory from '@/components/pages/admin/add-subcategory';
+import {
+	getProductsBySubcategoryId,
+	getSubcategoryById,
+} from '@/lib/controller/subcategories-controller';
+import { getCategoryById } from '@/lib/controller/categories-controller';
 
 export default async function SubcategoryPage({
 	params,
 }: {
 	params: { category: string; subcategory: string };
 }) {
-	// const subcategory = await getSubcategoryById(params.subcategory);
-	const subcategory: ISubcategory = {
-		title: 'SUBCATEGORY_TEST',
-	};
+	const subcategory = await getSubcategoryById(params.subcategory);
 	if (!subcategory) return notFound();
-	const products = await getProducts();
+	const products = await getProductsBySubcategoryId(
+		subcategory.store_subcategory_id
+	);
+	// const products = await getProducts();
+	const category = await getCategoryById(subcategory.category_id);
+	const breadCrumbItems = [
+		{ name: 'Categories', path: '/categories' },
+		{
+			name: category.title,
+			path: `/categories/${category.store_category_id}`,
+		},
+		{
+			name: subcategory.title,
+			path: `/categories/${subcategory.store_subcategory_id}`,
+		},
+	];
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>
 				<div className='text-sm 2xl:text-base font-libre'>
-					<Breadcrumb />
+					<Breadcrumb breadcrumbItems={breadCrumbItems} />
 				</div>
 				<div className='flex'>
 					<UpdateSubcategory subcategory={subcategory} />
@@ -85,7 +97,26 @@ export default async function SubcategoryPage({
 							Get started by adding categories to your
 							marketplace
 						</div>
-						<AddSubcategory />
+						<Button
+							className='w-8 h-8 lg:h-8 lg:w-fit'
+							asChild
+						>
+							<Link
+								href={`/products/add?category=${slugify(
+									params.category
+								)}&subcategory=${slugify(
+									params.subcategory
+								)}`}
+								className=' whitespace-nowrap'
+							>
+								<span className='lg:hidden'>
+									<PlusIcon />
+								</span>
+								<span className='hidden lg:flex whitespace-nowrap '>
+									Add Product
+								</span>
+							</Link>
+						</Button>
 					</div>
 				</div>
 			) : (
@@ -102,17 +133,13 @@ export default async function SubcategoryPage({
 									params.subcategory
 								)}/${slugify(a.name)}`}
 							> */}
-							<Link
-								href={`/products/${slugify(
-									a.name
-								)}?category=${slugify(
-									params.category
-								)}&subcategory=${slugify(
-									params.subcategory
-								)}`}
-							>
+							<Link href={`/products/${a.product_id}`}>
 								<Image
-									src={a.image[0]}
+									src={
+										a.image
+											? a.image[0]
+											: '/pph.jpg'
+									}
 									alt='Ariaria Fashion Image'
 									quality={100}
 									fill

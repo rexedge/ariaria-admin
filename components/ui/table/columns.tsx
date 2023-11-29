@@ -42,13 +42,13 @@ export const ordersColumn: ColumnDef<IOrderItem>[] = [
 			return (
 				<div className='flex gap-2 items-center'>
 					<div className='h-16 aspect-video overflow-clip rounded-lg'>
-						<Image
+						{/* <Image
 							alt=''
 							src={order.products[0].image[0]}
 							height={90}
 							width={160}
 							className='h-full w-full object-cover object-center'
-						/>
+						/> */}
 					</div>
 					{order.products[0].name}
 				</div>

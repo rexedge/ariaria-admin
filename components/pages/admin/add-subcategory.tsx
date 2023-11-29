@@ -11,7 +11,7 @@ import {
 import { PlusIcon } from 'lucide-react';
 import React from 'react';
 
-export default function AddSubcategory() {
+export default function AddSubcategory({ categoryId }: { categoryId: string }) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -30,7 +30,7 @@ export default function AddSubcategory() {
 						Add A Subcategory
 					</DialogTitle>
 					<DialogDescription className='p-5 xl:p-8'>
-						<NewSubcategoryForm />
+						<NewSubcategoryForm categoryId={categoryId} />
 					</DialogDescription>
 				</DialogHeader>
 			</DialogContent>

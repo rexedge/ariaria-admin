@@ -26,18 +26,26 @@ export default async function CategoryPage({
 	params: { category: string };
 }) {
 	const category = await getCategoryById(params.category);
+	const breadCrumbItems = [
+		{ name: 'Categories', path: '/categories' },
+		{
+			name: category.title,
+			path: `/categories/${category.store_category_id}`,
+		},
+	];
 	if (!category) return notFound();
-	const sc = await getSubcategoriesByCategoryId(params.category);
-	const subcategories: ISubcategory[] = [];
+	const subcategories = await getSubcategoriesByCategoryId(params.category);
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>
 				<div className='text-sm 2xl:text-base font-libre'>
-					<Breadcrumb />
+					<Breadcrumb breadcrumbItems={breadCrumbItems} />
 				</div>
 				<div className='flex'>
 					<UpdateCategory category={category} />
-					<AddSubcategory />
+					<AddSubcategory
+						categoryId={category.store_category_id}
+					/>
 				</div>
 			</div>
 			<div className='w-full xl:aspect-subcategory-lg aspect-subcategory rounded-lg shadow relative overflow-clip'>
@@ -62,7 +70,9 @@ export default async function CategoryPage({
 							Get started by adding categories to your
 							marketplace
 						</div>
-						<AddSubcategory />
+						<AddSubcategory
+							categoryId={category.store_category_id}
+						/>
 					</div>
 				</div>
 			) : (
@@ -73,9 +83,7 @@ export default async function CategoryPage({
 							key={b}
 						>
 							<Link
-								href={`/categories/${slugify(
-									category.title
-								)}/${slugify(a.title)}`}
+								href={`/categories/${category.store_category_id}/${a.store_subcategory_id}`}
 							>
 								<Image
 									src={a.image}

@@ -11,13 +11,13 @@ export default function LikedItem({ product }: { product: IStoreProduct }) {
 				<Icons.CloseIcon />
 			</div>
 			<div className='shrink-0 min-w-[60px] w-2/5 md:w-1/6 max-w-[150px] aspect-square rounded-xl overflow-clip'>
-				<Image
+				{/* <Image
 					height={300}
 					width={300}
 					alt=''
 					src={product.image[0]}
 					className='h-full w-full object-cover'
-				/>
+				/> */}
 			</div>
 			<div className='w-full flex flex-col justify-between lg:gap-2'>
 				<div className='text-sm lg:text-base font-libre font-semibold'>

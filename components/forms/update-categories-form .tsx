@@ -2,7 +2,6 @@
 import React from 'react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { DownloadIcon } from '@/lib/icons';
 import FileUploader from '../shared/images/file-uploader';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';

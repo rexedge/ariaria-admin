@@ -3,17 +3,33 @@ import * as Icons from '@/lib/icons';
 
 export const NAV_BAR_LINKS: INavLink[] = [
 	{
-		title: 'Home',
+		title: 'Dashboard',
 		href: '/',
 	},
 	{
-		title: 'Category',
-		href: '/category',
+		title: 'Categories',
+		href: '/categories',
 		// sub: CATEGORIES,
 	},
 	{
-		title: 'About Us',
-		href: '/about-us',
+		title: 'Products',
+		href: '/products',
+	},
+	{
+		title: 'Orders',
+		href: '/orders',
+	},
+	{
+		title: 'Customers',
+		href: '/customers',
+	},
+	{
+		title: 'Statistics',
+		href: '/statistics',
+	},
+	{
+		title: 'Settings',
+		href: '/settings',
 	},
 ];
 export const HERO_ITEMS: IHeroItem[] = [
@@ -337,10 +353,10 @@ export const SocialMedia: ISocialMediaProps[] = [
 		icon: <Icons.LinkedinIcon />,
 	},
 ];
-export const ALL_PRODUCTS: IStoreProduct[] = [
+export const ALL_PRODUCTS: Partial<IStoreProduct>[] = [
 	{
 		id: 0,
-		productId: 'ghdb47-7848dbbdey-89874bdbhdb-hhgbdhfybe',
+		product_id: 'ghdb47-7848dbbdey-89874bdbhdb-hhgbdhfybe',
 		image: [
 			'/skirt.png',
 			'/nike.png',
@@ -353,7 +369,7 @@ export const ALL_PRODUCTS: IStoreProduct[] = [
 		brand: 'Gucci',
 		discountPrice: 50000,
 		discountPercent: 50,
-		stock: 200,
+		stock_value: 200,
 		description:
 			'Considering the fact that the inflation rates are growing every year it does not matter how much we earn but what matters is how much we save. Saving money can help you become financially secure. ',
 		category: 'Fashion and Apparels',
@@ -1704,7 +1720,10 @@ export const ENDPOINTS = {
 	categories: {
 		all: '/api/stores/category',
 	},
+	products: {
+		all: '/api/stores/product',
+	},
 	subcategories: {
-		all: '',
+		all: '/api/stores/subcategory',
 	},
 };

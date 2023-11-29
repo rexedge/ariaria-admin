@@ -26,13 +26,13 @@ export default async function UpdateProductPage({
 					<div className='text-primary text-xs lg:text-sm absolute flex items-center justify-center p-1 px-2 h-8 w-fit top-0 left-0 bg-white rounded-br-xl shadow hover:shadow-lg transition-all duration-500'>
 						{product?.category}
 					</div>
-					<Image
+					{/* <Image
 						src={product?.image[0]}
 						alt=''
 						height={200}
 						width={1200}
 						className='h-full w-full object-cover object-center'
-					/>
+					/> */}
 				</div>
 			</div>
 		</div>

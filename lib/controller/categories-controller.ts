@@ -13,25 +13,29 @@ export const getCategories = async () => {
 };
 
 export const getCategoryById = async (id: string) => {
-	const url = `${BASE_URL}${ENDPOINTS.categories.all}${id}`;
+	const url = `${BASE_URL}${ENDPOINTS.categories.all}/${id}`;
 	const singleCategoryReq = await fetch(url, {
 		headers: headers,
 		cache: 'no-store',
 	});
 	const category: ICategoryRes = await singleCategoryReq.json();
-	const c = category.data.store;
-	console.log(c);
+	const c = category.data.category;
 	return c;
 };
 
 export const getSubcategoriesByCategoryId = async (id: string) => {
-	const url = `${BASE_URL}${ENDPOINTS.categories.all}${id}/subcategories`;
+	const url = `${BASE_URL}${ENDPOINTS.categories.all}/${id}/subcategories`;
 	const allSubcategoriesReq = await fetch(url, {
 		headers: headers,
 		cache: 'no-store',
 	});
-	const subcategoryResponse: any = await allSubcategoriesReq.json();
-	// const c = category.data.store;
-	console.log(subcategoryResponse);
-	return subcategoryResponse;
+	const subcategoryResponse: ISubcategoriesRes =
+		await allSubcategoriesReq.json();
+	console.log({
+		HEADERS: headers,
+		SUBCATEGORY: subcategoryResponse,
+	});
+	const c = subcategoryResponse.data.category.tbl_store_subcategories;
+	console.log(c);
+	return c;
 };

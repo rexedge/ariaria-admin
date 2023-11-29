@@ -33,7 +33,6 @@ const defaultValues: Partial<addCategoriesFormValue> = {
 
 export default function NewCategoriesForm() {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
-	const { setValue } = useForm();
 	const router = useRouter();
 
 	const form = useForm<addCategoriesFormValue>({
@@ -42,11 +41,6 @@ export default function NewCategoriesForm() {
 		mode: 'onChange',
 	});
 	const handleprofileImage = async (file: { name: string; url: string }) => {
-		console.log({
-			HANDLE_IMAGE: '',
-			IMAGE_URL: file.url,
-			iMAGE_NAME: file.name,
-		});
 		form.setValue('image', file.url);
 	};
 	async function onSubmit(data: addCategoriesFormValue) {

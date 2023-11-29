@@ -10,7 +10,7 @@ export default async function ProductPage({
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>
 				<div className='text-sm 2xl:text-base font-libre'>
-					<Breadcrumb />
+					{/* <Breadcrumb /> */}
 				</div>
 				<div className='flex'>
 					{/* <UpdateSubcategory subcategory={subcategory} />

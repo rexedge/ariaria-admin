@@ -16,18 +16,19 @@ export default function SideBarItem({
 	const pathname = usePathname();
 	const isActive = pathname === href;
 	return (
-		<div
-			className={`flex text-sm 2xl:text-base gap-2 h-8 2xl:h-10 w-52 justify-start pl-8 items-center hover:text-gray-200 hover:bg-primary/80 ${
-				isActive ? 'bg-primary text-white' : ''
-			} `}
+		<Link
+			href={href}
+			className=''
 		>
-			{icon}
-			<Link
-				href={href}
-				className=''
+			<div
+				className={`flex text-sm 2xl:text-base gap-2 h-8 2xl:h-10 w-52 justify-start pl-8 items-center hover:text-gray-200 hover:bg-primary/80 ${
+					isActive ? 'bg-primary text-white' : ''
+				} `}
 			>
+				{icon}
+
 				{name}
-			</Link>
-		</div>
+			</div>
+		</Link>
 	);
 }

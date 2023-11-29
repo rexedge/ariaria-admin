@@ -16,12 +16,12 @@ import { unslugify } from '@/lib/utils';
 export default function UpdateProductForm({
 	product,
 }: {
-	product: IStoreProduct;
+	product: Partial<IStoreProduct>;
 }) {
 	return (
 		<form className='flex flex-col gap-5'>
 			<Input
-				defaultValue={unslugify(product.name)}
+				defaultValue={unslugify(product.name!)}
 				className='hidden'
 			/>
 			<div className=''>
@@ -43,7 +43,7 @@ export default function UpdateProductForm({
 				/>
 			</div>
 			<div className=''>
-				<Select defaultValue={product?.stockOption || 'limited'}>
+				<Select defaultValue={product?.stock_option || 'limited'}>
 					<SelectTrigger>
 						<SelectValue placeholder='Stock option' />
 					</SelectTrigger>

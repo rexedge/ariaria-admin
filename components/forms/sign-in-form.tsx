@@ -107,7 +107,7 @@ export default function SignInForm({ error }: { error?: string }) {
 							)}
 						/>
 
-						<div className='flex justify-between gap-4 w-full text-sm pt-2'>
+						<div className='flex justify-between gap-4 w-full text-xs lg:text-sm pt-2'>
 							<div className='flex items-center '>
 								<Checkbox />
 								<label

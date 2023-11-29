@@ -15,12 +15,13 @@ import DeleteCategory from '@/components/pages/admin/delete-category';
 import { getCategories } from '@/lib/controller/categories-controller';
 
 export default async function CategoriesPage() {
+	const breadCrumbItems = [{ name: 'Categories', path: '/categories' }];
 	const categories = await getCategories();
 	return (
 		<div className='min-h-[80svh] xl:p-5'>
 			<div className='flex items-center justify-between'>
 				<div className='text-sm 2xl:text-base font-libre'>
-					<Breadcrumb />
+					<Breadcrumb breadcrumbItems={breadCrumbItems} />
 				</div>
 				{categories.length > 0 && (
 					<div>

@@ -26,7 +26,7 @@ interface IHeroItem {
 	heading: React.ReactNode;
 }
 interface ICart {
-	products: IStoreProduct[];
+	products: Partial<IStoreProduct>[];
 }
 
 interface IProduct {
@@ -47,8 +47,8 @@ interface IReview {
 
 interface IStoreProduct {
 	id?: number;
-	productId?: string;
-	image: string[];
+	product_id?: string;
+	image?: string[];
 	name: string;
 	price: number;
 	brand?: string;
@@ -57,13 +57,21 @@ interface IStoreProduct {
 	description?: string;
 	discountPercent?: number;
 	discountPrice?: number;
-	stock?: number;
-	stockOption?: 'limited' | 'unlimited';
-	status?: 'active' | 'inactive';
+	stock_value?: number;
+	stock_option?: 'limited' | 'unlimited';
+	type: 'physical' | 'virtual';
+	status?: 'available' | 'draft' | 'sold-out';
 	reviews?: IReview[];
 	category?: string;
 	subCategory?: string[];
-	tags?: string[];
+	tags?: string[] | string;
+	store_id: string;
+	link: string;
+	createdAt: string;
+	updatedAt: string;
+	deleted: boolean;
+	category_id: string;
+	subcategory_id: string;
 }
 interface INotificationItem {
 	id?: string;
@@ -82,7 +90,7 @@ interface IOrderItem {
 	id: string;
 	delivery: 'home-delivery' | 'pick-up';
 	status: 'pending' | 'successful' | 'failed' | 'awaiting';
-	products: IStoreProduct[];
+	products: Partial<IStoreProduct>[];
 	date: string;
 	profile: {
 		email: string;
@@ -160,8 +168,17 @@ interface ICategory {
 }
 
 interface ISubcategory {
+	id: number;
+	store_subcategory_id: string;
+	store_id: string;
+	category_id: string;
 	title: string;
-	image?: StaticImageData | string;
+	description: string;
+	image: string;
+	status: string;
+	deleted: boolean;
+	createdAt: string;
+	updatedAt: string;
 }
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -256,7 +273,7 @@ interface ICategoriesRes {
 interface ICategoryRes {
 	success: boolean;
 	message: string;
-	data: { store: ICategory };
+	data: { category: ICategory };
 }
 
 interface IImage {
@@ -267,4 +284,100 @@ interface IImage {
 	id?: number | string;
 	image_id?: string;
 	updatedAt?: string;
+}
+
+interface IProductsRes {
+	success: boolean;
+	message: string;
+	data: {
+		store: {
+			id: number;
+			store_id: string;
+			name: string;
+			description?: string;
+			link: string;
+			store_url: string;
+			image?: string;
+			user_id: string;
+			user_type?: string;
+			type?: string;
+			currency: string;
+			lang: string;
+			status: string;
+			deleted: boolean;
+			createdAt: string;
+			updatedAt: string;
+			tbl_products: IStoreProduct[];
+		};
+	};
+}
+
+interface ISubcategoriesRes {
+	success: boolean;
+	message: string;
+	data: {
+		category: {
+			id: number;
+			store_category_id: string;
+			store_id: string;
+			title: string;
+			description: string;
+			image: string;
+			status: string;
+			deleted: false;
+			createdAt: string;
+			updatedAt: string;
+			tbl_store: IStore;
+			tbl_store_subcategories: ISubcategory[];
+		};
+	};
+}
+
+interface ISubcategoryRes {
+	success: boolean;
+	message: string;
+	data: {
+		subcategory: {
+			id: number;
+			store_subcategory_id: string;
+			store_id: string;
+			category_id: string;
+			title: string;
+			description: string;
+			image: string;
+			status: string;
+			deleted: boolean;
+			createdAt: string;
+			updatedAt: string;
+			tbl_store_category: ICategory;
+		};
+	};
+}
+interface ISubcategoriesOriginalRes {
+	success: boolean;
+	message: string;
+	data: {
+		subcategory: ISubcategory[];
+	};
+}
+
+interface IProductsResBySubcategory {
+	success: boolean;
+	message: string;
+	data: {
+		subcategory: {
+			id: number;
+			store_subcategory_id: string;
+			store_id: string;
+			category_id: string;
+			title: string;
+			description: string;
+			image: string;
+			status: string;
+			deleted: boolean;
+			createdAt: string;
+			updatedAt: string;
+			tbl_products: IStoreProduct[];
+		};
+	};
 }

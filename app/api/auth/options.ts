@@ -25,6 +25,7 @@ export const options: NextAuthOptions = {
 						headers,
 					});
 					const result = await res.json();
+					console.log(result);
 					if (result.success === false) {
 						throw new Error(
 							result?.message || 'Something went wrong'

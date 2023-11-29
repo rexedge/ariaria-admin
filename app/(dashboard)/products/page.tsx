@@ -12,18 +12,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
-import { getProducts } from '@/app/api/products';
+// import { getProducts } from '@/app/api/products';
 import { Button } from '@/components/ui/button';
 import { EditIcon, PlusIcon, TrashIcon } from 'lucide-react';
+import { getProducts } from '@/lib/controller/products-controller';
 
 export default async function ProductsPage() {
-	const products = await getProducts();
-	// const products: IStoreProduct[] = [];
+	const products: IStoreProduct[] = await getProducts();
+	console.log(products);
+	const breadCrumbItems = [{ name: 'Products', path: '/products' }];
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>
 				<div className='text-sm 2xl:text-base font-libre'>
-					<Breadcrumb />
+					<Breadcrumb breadcrumbItems={breadCrumbItems} />
 				</div>
 				<div className='flex'>
 					<Button
@@ -76,9 +78,13 @@ export default async function ProductsPage() {
 							className='rounded-lg shadow relative overflow-clip aspect-square w-full shrink-0'
 							key={b}
 						>
-							<Link href={`/products/${slugify(a.name)}`}>
+							<Link href={`/products/${a.store_id}`}>
 								<Image
-									src={a.image[0]}
+									src={
+										a.image
+											? a.image[0]
+											: '/pph.jpg'
+									}
 									alt='Ariaria Fashion Image'
 									quality={100}
 									fill

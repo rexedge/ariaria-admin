@@ -1,27 +1,17 @@
-'use client';
-import { unslugify } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 interface IBreadcrumbItem {
 	name: string;
 	path: string;
 }
 
-const Breadcrumb: React.FC = () => {
-	const pathname = usePathname();
-	const pathSegments = pathname.split('/');
-	const breadcrumbItems = pathSegments.map((segment, index) => {
-		return {
-			name: unslugify(segment),
-			path: pathSegments.slice(0, index + 1).join('/'),
-		};
-	});
-	breadcrumbItems.shift();
-	// breadcrumbItems.splice(0, 1);
-
+export default function Breadcrumb({
+	breadcrumbItems,
+}: {
+	breadcrumbItems: IBreadcrumbItem[];
+}) {
 	return (
 		<ul className='flex flex-row items-center gap-2'>
 			{breadcrumbItems.map((item, id) => {
@@ -43,6 +33,4 @@ const Breadcrumb: React.FC = () => {
 			})}
 		</ul>
 	);
-};
-
-export default Breadcrumb;
+}

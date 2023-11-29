@@ -1,7 +1,8 @@
 import { ALL_PRODUCTS } from '@/lib/data';
 import { slugify } from '@/lib/utils';
 
-export const getProducts = async (): Promise<IStoreProduct[]> => ALL_PRODUCTS;
+export const getProducts = async (): Promise<Partial<IStoreProduct>[]> =>
+	ALL_PRODUCTS;
 
 export const addReview = async (
 	id: string,
@@ -16,7 +17,7 @@ export const addReview = async (
 
 export const getProductById = async (
 	id: string
-): Promise<IStoreProduct | undefined> =>
+): Promise<Partial<IStoreProduct> | undefined> =>
 	getProducts().then((products) =>
-		products.find((p) => slugify(p.name) === id)
+		products.find((p) => slugify(p.name!) === id)
 	);

@@ -1,8 +1,9 @@
-import { getProductById } from '@/app/api/products';
+// import { getProductById } from '@/app/api/products';
 import Breadcrumb from '@/components/layout/breadcrumb';
 import DeleteCategory from '@/components/pages/admin/delete-category';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { getProductById } from '@/lib/controller/products-controller';
 import { CartIcon, EditIcon, ProductsIcon } from '@/lib/icons';
 import { Info, ShoppingBag, TagIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -16,12 +17,13 @@ export default async function ProductPage({
 	params: { product: string };
 }) {
 	const product = await getProductById(params.product);
+	console.log(params.product);
 	if (!product) return notFound();
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>
 				<div className='text-sm 2xl:text-base font-libre'>
-					<Breadcrumb />
+					{/* <Breadcrumb /> */}
 				</div>
 				<div className='flex gap-3'>
 					<Button asChild>
@@ -39,7 +41,7 @@ export default async function ProductPage({
 			<div className='flex flex-col gap-5'>
 				<ScrollArea className='whitespace-nowrap'>
 					<div className='flex space-x-4'>
-						{product.image.map((image, k) => (
+						{/* {product.image?.map((image, k) => (
 							<figure
 								key={k}
 								className='shrink-0'
@@ -54,7 +56,7 @@ export default async function ProductPage({
 									/>
 								</div>
 							</figure>
-						))}
+						))} */}
 					</div>
 					<ScrollBar orientation='horizontal' />
 				</ScrollArea>
@@ -92,14 +94,14 @@ export default async function ProductPage({
 								Tags
 							</h1>
 							<div className='flex items-center w-full gap-3'>
-								{product.tags.map((tag, key) => (
+								{/* {product.tags.map((tag, key) => (
 									<Button
 										className=' font-light capitalize'
 										key={key}
 									>
 										{tag}
 									</Button>
-								))}
+								))} */}
 							</div>
 						</>
 					)}
