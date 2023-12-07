@@ -117,7 +117,7 @@ export default function NewProductForm({
 			(a) => a.store_subcategory_id === subcategoryId
 		);
 		ssc ? setSelectedSubcategory(ssc) : setSelectedSubcategory(undefined);
-		form.setValue('subcategory_id', '');
+		form.setValue('subcategory_id', ssc?.store_subcategory_id!);
 	};
 	const handleStockOptionChange = async (categoryId: string) => {};
 	const handleFiles = (newImages: string[]) => {
