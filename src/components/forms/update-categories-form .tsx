@@ -18,7 +18,7 @@ import {
 import { NextResponse } from 'next/server';
 
 const updateCategoriesFormSchema = z.object({
-	id: z.string(),
+	store_category_id: z.string(),
 	title: z
 		.string({ required_error: 'Enter an title' })
 		.min(2, { message: 'Category should be a valid word' }),
@@ -38,11 +38,10 @@ export default function UpdateCategoriesForm({
 		title: category?.title,
 		description: category?.description,
 		image: category?.image,
-		id: category?.store_category_id,
+		store_category_id: category?.store_category_id,
 	};
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
-	const { setValue } = useForm();
 	const router = useRouter();
 
 	const form = useForm<updateCategoriesFormValue>({
@@ -70,7 +69,7 @@ export default function UpdateCategoriesForm({
 						description: data.description,
 						title: data.title,
 						image: data.image,
-						id: data.id,
+						store_category_id: data.store_category_id,
 					}),
 				}
 			);
@@ -140,7 +139,7 @@ export default function UpdateCategoriesForm({
 					disabled={isLoading}
 					className='w-full'
 				>
-					Create Category
+					Update Category
 				</Button>
 			</form>
 		</Form>

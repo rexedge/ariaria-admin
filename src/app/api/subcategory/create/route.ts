@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
 		});
 		const result = await response.json();
 		if (!response.ok) {
+			console.log(result);
 			throw new Error(`Something Went wrong ${response.statusText}`);
 		} else {
 			return NextResponse.json(result);
@@ -48,7 +49,7 @@ export async function PUT(req: NextRequest) {
 	};
 
 	try {
-		const url = `${BASE_URL}${ENDPOINTS.subcategories.all}/${body.id}`;
+		const url = `${BASE_URL}${ENDPOINTS.subcategories.all}/${body.store_subcategory_id}`;
 		console.log({ URL: url, PAYLOAD: body });
 		const response = await fetch(url, {
 			method: 'PUT',

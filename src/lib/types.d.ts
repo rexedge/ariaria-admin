@@ -45,6 +45,19 @@ interface IReview {
 	comment: string; // The review comment or feedback
 }
 
+interface IProductMedia {
+	id: number;
+	product_media_id: string;
+	product_id: string;
+	title: string;
+	media: string;
+	description: string;
+	type: string;
+	deleted: boolean;
+	createdAt: string;
+	updatedAt: string;
+}
+
 interface IStoreProduct {
 	id?: number;
 	product_id?: string;
@@ -62,9 +75,7 @@ interface IStoreProduct {
 	type: 'physical' | 'virtual';
 	status?: 'available' | 'draft' | 'sold-out';
 	reviews?: IReview[];
-	category?: string;
-	subCategory?: string[];
-	tags?: string[] | string;
+	tags?: string;
 	store_id: string;
 	link: string;
 	createdAt: string;
@@ -72,6 +83,8 @@ interface IStoreProduct {
 	deleted: boolean;
 	category_id: string;
 	subcategory_id: string;
+	tbl_store: IStore;
+	tbl_product_media: IProductMedia[];
 }
 interface INotificationItem {
 	id?: string;
@@ -310,6 +323,11 @@ interface IProductsRes {
 			tbl_products: IStoreProduct[];
 		};
 	};
+}
+interface IProductRes {
+	success: boolean;
+	message: string;
+	data: { product: IStoreProduct };
 }
 
 interface ISubcategoriesRes {

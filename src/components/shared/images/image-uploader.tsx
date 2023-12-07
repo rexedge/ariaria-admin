@@ -3,23 +3,24 @@ import React, { useState, useRef } from 'react';
 import Compressor from 'compressorjs';
 import { generateUniqueID } from '@/src/lib/utils';
 import { toast } from 'sonner';
-import { PlusCircleIcon } from 'lucide-react';
+import { PlusCircleIcon, X } from 'lucide-react';
 import BlurImage from './blur-image';
+import { AddIcon } from '@/src/lib/icons';
 
 interface MultipleImagesUploaderProps {
 	folder?: string;
-	handleFiles: (newImages: IImage[]) => void;
+	handleFiles: (newImages: string[]) => void;
 	text?: string;
-	initialImages: IImage[];
+	initialImages: string[];
 }
 
 const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 	props
 ) => {
-	const urls: string[] = props.initialImages.map((image) => image.url);
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [imagePreviews, setImagePreviews] = useState<string[]>(urls);
+	const [imagePreviews, setImagePreviews] = useState<string[]>(
+		props.initialImages
+	);
 	const hiddenFileInput = useRef<HTMLInputElement>(null);
 
 	const uploadProfileImage = async (data: FormData) => {
@@ -39,7 +40,7 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 
 	const uploadProfileImages = async (images: File[]) => {
 		const maxAllowedSize = 10 * 1024 * 1024;
-		const uploadedImages: IImage[] = [];
+		const uploadedImages: string[] = [];
 
 		for (const inputImage of images) {
 			if (inputImage.size > maxAllowedSize) {
@@ -47,7 +48,9 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 				continue;
 			}
 
-			const imageName = `c4b-${generateUniqueID()}-${props.folder}`;
+			const imageName = `ariaria-${generateUniqueID()}-${
+				props.folder
+			}`;
 			const formData = new FormData();
 			formData.append('file', inputImage);
 			formData.append('folder', props.folder as string);
@@ -58,7 +61,7 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 			// console.log('Single Image.....', singleImage);
 
 			if (response?.success === 'true') {
-				uploadedImages.push(singleImage);
+				uploadedImages.push(singleImage.url);
 				// console.log('Uploaded successfully');
 			} else {
 				// console.log('Unable to upload file');
@@ -120,11 +123,11 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 		<>
 			<div>
 				<div>
-					<div className='flex gap-3 flex-wrap'>
+					<div className='grid grid-cols-3 lg:grid-cols-5 gap-3 flex-wrap'>
 						{imagePreviews.map((imageUrl, index) => (
 							<div
 								key={index}
-								className='relative max-w-52 aspect-[2/3] rounded-2xl overflow-hidden'
+								className='relative aspect-square bg-primary rounded-xl overflow-clip'
 							>
 								<BlurImage
 									key={index}
@@ -132,40 +135,38 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 									height={600}
 									width={400}
 									alt={`avatar-${index}`}
-									className='w-52 aspect-[2/3] rounded-2xl object-cover'
+									className='w-full aspect-square rounded-xl object-cover'
 								/>
-								{/* <div
-								onClick={() => {
-									const newInitialImages = [
-										...props.initialImages,
-									];
-									newInitialImages.splice(index, 1);
-									props.handleFiles(
-										newInitialImages
-									); // Notify parent component
-								}}
-								className='absolute top-0 right-0 p-2 text-red-500 cursor-pointer'
-							>
-								<IconButton className='bg-white p-1 rounded-full overflow-hidden text-rose-500'>
-									{<AppointmentDeleteIcon />}
-								</IconButton>
-							</div> */}
+								<div
+									onClick={() => {
+										const newInitialImages = [
+											...props.initialImages,
+										];
+										newInitialImages.splice(
+											index,
+											1
+										);
+										props.handleFiles(
+											newInitialImages
+										); // Notify parent component
+									}}
+									className='absolute top-0 left-0 p-1 text-primary bg-white rounded-br-xl cursor-pointer'
+								>
+									<X className='h-5 w-5' />
+								</div>
 							</div>
 						))}
 						<div
 							onClick={handleClick}
-							className={`w-52 aspect-[2/3] rounded-2xl bg-gray-100 flex-col flex items-center justify-center`}
+							className={`aspect-square rounded-xl bg-gray-100 border border-gray-500 flex-col flex items-center justify-center`}
 						>
 							<div
 								className={`${
 									isLoading ? 'animate-spin' : ''
 								}`}
 							>
-								{<PlusCircleIcon />}
+								{<AddIcon />}
 							</div>
-							<p className='text-sm text-center text-black'>
-								{isLoading ? 'Uploading' : props.text}
-							</p>
 						</div>
 					</div>
 				</div>

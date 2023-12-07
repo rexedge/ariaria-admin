@@ -19,10 +19,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
 			headers,
 			cache: 'no-store',
 		});
-
+		console.log(response.status);
 		if (response.status !== 200) {
-			// console.log(NextResponse.json(response));
-			throw new Error('Something Went wrong');
+			return NextResponse.json({
+				status: 400,
+				message: 'Something went wrong',
+			});
 		} else {
 			const subcategoriesResponse: ISubcategoriesRes =
 				await response.json();
@@ -31,6 +33,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 			return NextResponse.json(subcategories);
 		}
 	} catch (error: any) {
-		return error?.message;
+		return NextResponse.json({ status: 400, message: error?.message });
 	}
 }

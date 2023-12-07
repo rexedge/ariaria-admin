@@ -3,9 +3,12 @@ import { CUSTOMERS } from '@/src/lib/data';
 import React from 'react';
 import { DataTable } from '@/src/components/ui/table/data-table';
 import { customersColumn } from '@/src/components/ui/table/columns';
+import { getCustomers } from '@/src/lib/controller/customers-controller';
 
-export default function CustomerPage() {
+export default async function CustomerPage() {
 	const customers = CUSTOMERS;
+	const c = await getCustomers();
+	console.log(c);
 	return (
 		<div className='flex flex-col gap-5'>
 			<div className='flex justify-between'>

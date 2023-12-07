@@ -21,6 +21,7 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
+	FormLabel,
 	FormMessage,
 } from '../ui/form';
 import Tag from '../ui/tag';
@@ -33,18 +34,20 @@ import {
 	DialogTrigger,
 } from '../ui/dialog';
 import { NextResponse } from 'next/server';
+import MultipleImagesUploader from '../shared/images/image-uploader';
+import Image from 'next/image';
 
 // import { getSubcategoriesByCategoryId } from '@/lib/controller/categories-controller';
 
 const addProductFormSchema = z.object({
 	name: z
 		.string({ required_error: 'Enter product name' })
-		.min(2, { message: 'Category should be a valid word' }),
+		.min(2, { message: 'Product name should be a valid word' }),
 	description: z.string({ required_error: 'Enter product description' }),
 	price: z.string({ required_error: 'Add Price' }),
 	category_id: z.string({ required_error: 'select a category' }),
 	subcategory_id: z.string({ required_error: 'select a subcategory' }),
-	// images: z.string({ required_error: 'Add at least 1 (one) Image' }),
+	media: z.array(z.string({ required_error: 'Add at least 1 (one) Image' })),
 	stock_option: z
 		.string({ required_error: 'Select stock option' })
 		.refine((value) => ['limited', 'unlimited'].includes(value), {
@@ -82,6 +85,7 @@ export default function NewProductForm({
 		type: 'physical',
 		stock_option: 'limited',
 		tags: [],
+		media: [],
 	};
 	const form = useForm<addProductFormValue>({
 		resolver: zodResolver(addProductFormSchema),
@@ -96,7 +100,7 @@ export default function NewProductForm({
 	const [selectedCategory, setSelectedCategory] =
 		React.useState<ICategory | null>(null);
 	const [selectedSubcategory, setSelectedSubcategory] =
-		React.useState<string>('');
+		React.useState<ISubcategory>();
 
 	const handleCategoryChange = async (categoryId: string) => {
 		const subcategoriesRequest = await fetch(
@@ -104,10 +108,23 @@ export default function NewProductForm({
 		);
 		const subcategoriesResponse = await subcategoriesRequest.json();
 		setSubcategories(subcategoriesResponse);
+		setSelectedSubcategory(undefined);
 		form.setValue('category_id', categoryId);
 		form.setValue('subcategory_id', '');
 	};
+	const handleSubcategoryChange = async (subcategoryId: string) => {
+		const ssc = subcategories.find(
+			(a) => a.store_subcategory_id === subcategoryId
+		);
+		ssc ? setSelectedSubcategory(ssc) : setSelectedSubcategory(undefined);
+		form.setValue('subcategory_id', '');
+	};
 	const handleStockOptionChange = async (categoryId: string) => {};
+	const handleFiles = (newImages: string[]) => {
+		// const urlArray: string[] = newImages.map((image) => image.url);
+		form.setValue('media', newImages);
+		console.log(newImages);
+	};
 
 	const handleTagRemove = (index: number) => {
 		const currentTags = form.watch('tags', []);
@@ -117,30 +134,6 @@ export default function NewProductForm({
 		];
 		form.setValue('tags', updatedTags);
 	};
-
-	// React.useEffect(() => {
-	// 	// Fetch your subcategories data based on the selected category
-	// 	const fetchSubcategories = async () => {
-	// 		try {
-	// 			if (selectedCategory) {
-	// 				// Replace the following line with your actual API call to get subcategories
-	// 				const subcategoriesResponse =
-	// 					await getSubcategoriesByCategoryId(
-	// 						selectedCategory.store_category_id
-	// 						// form.getValues('category_id')
-	// 					);
-	// 				setSubcategories(subcategoriesResponse);
-	// 			} else {
-	// 				setSubcategories([]); // If no category is selected, clear subcategories
-	// 			}
-	// 		} catch (error) {
-	// 			console.error('Error fetching subcategories:', error);
-	// 		}
-	// 	};
-
-	// 	fetchSubcategories();
-	// }, [selectedCategory]);
-	// }, [form.getValues('category_id')]);
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 	const router = useRouter();
@@ -167,6 +160,7 @@ export default function NewProductForm({
 						status: data.status,
 						stock_value: data.stock_value,
 						tags: data.tags,
+						media: data.media,
 					}),
 				}
 			);
@@ -178,7 +172,7 @@ export default function NewProductForm({
 				toast.success('Product created successfully');
 				setIsLoading(false);
 				form.reset();
-				router.refresh();
+				router.push('/products');
 				return NextResponse.json(productResponse);
 			} else {
 				setIsLoading(false);
@@ -286,7 +280,9 @@ export default function NewProductForm({
 						render={({ field }) => (
 							<FormItem>
 								<Select
-									onValueChange={field.onChange}
+									onValueChange={
+										handleSubcategoryChange
+									}
 									defaultValue={field.value}
 								>
 									<SelectTrigger>
@@ -431,7 +427,10 @@ export default function NewProductForm({
 							<FormItem>
 								<FormControl>
 									<div className=''>
-										<div className='flex items-center justify-start gap-2 flex-wrap'>
+										<FormLabel className=''>
+											Tags
+										</FormLabel>
+										<div className='flex items-center justify-start gap-2 flex-wrap pt-3'>
 											{tags.map(
 												(tag, index) => (
 													<Tag
@@ -520,6 +519,26 @@ export default function NewProductForm({
 							You can upload a maximum of 5 images.
 						</Label>
 					</div> */}
+					<FormField
+						control={form.control}
+						name='media'
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<div className=''>
+										<MultipleImagesUploader
+											handleFiles={handleFiles}
+											folder='ariaria-products'
+											initialImages={
+												field.value
+											}
+										/>
+									</div>
+								</FormControl>
+								<FormMessage className='text-left' />
+							</FormItem>
+						)}
+					/>
 
 					<Button
 						disabled={isLoading}
@@ -529,20 +548,20 @@ export default function NewProductForm({
 					</Button>
 				</form>
 			</Form>
-			{/* {subcategory && (
+			{selectedSubcategory && (
 				<div className='w-full aspect-[5/6] rounded-lg shadow relative overflow-clip'>
 					<div className='text-primary text-xs lg:text-sm absolute flex items-center justify-center p-1 px-2 h-8 w-fit top-0 left-0 bg-white rounded-br-xl shadow hover:shadow-lg transition-all duration-500'>
-						{subcategory?.title}
+						{selectedSubcategory?.title}
 					</div>
 					<Image
-						src={subcategory?.image}
+						src={selectedSubcategory?.image}
 						alt=''
 						height={200}
 						width={1200}
 						className='h-full w-full object-cover object-center rounded-lg'
 					/>
 				</div>
-			)} */}
+			)}
 		</>
 	);
 }

@@ -47,7 +47,7 @@ export async function PUT(req: NextRequest) {
 	};
 
 	try {
-		const url = `${BASE_URL}${ENDPOINTS.categories.all}/${body.id}`;
+		const url = `${BASE_URL}${ENDPOINTS.categories.all}/${body.store_category_id}`;
 		console.log({ URL: url, PAYLOAD: body });
 		const response = await fetch(url, {
 			method: 'PUT',

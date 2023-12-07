@@ -1,26 +1,23 @@
-import React from 'react';
-import { notFound } from 'next/navigation';
 import Breadcrumb from '@/src/components/layout/breadcrumb';
-import { FilledMarketPlaceIcon, MoreIcon } from '@/src/lib/icons';
-import Image from 'next/image';
+import UpdateSubcategory from '@/src/components/pages/admin/update-subcategory';
+import { Button } from '@/src/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/src/components/ui/dropdown-menu';
-import Link from 'next/link';
-import { slugify } from '@/src/lib/utils';
-import { getProducts } from '@/src/app/api/products';
-import { Button } from '@/src/components/ui/button';
-import { EditIcon, PlusIcon, TrashIcon } from 'lucide-react';
-import UpdateSubcategory from '@/src/components/pages/admin/update-subcategory';
-import AddSubcategory from '@/src/components/pages/admin/add-subcategory';
+import { getCategoryById } from '@/src/lib/controller/categories-controller';
 import {
 	getProductsBySubcategoryId,
 	getSubcategoryById,
 } from '@/src/lib/controller/subcategories-controller';
-import { getCategoryById } from '@/src/lib/controller/categories-controller';
+import { FilledMarketPlaceIcon, MoreIcon } from '@/src/lib/icons';
+import { slugify } from '@/src/lib/utils';
+import { EditIcon, PlusIcon, TrashIcon } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 export default async function SubcategoryPage({
 	params,
@@ -42,7 +39,7 @@ export default async function SubcategoryPage({
 		},
 		{
 			name: subcategory.title,
-			path: `/categories/${subcategory.store_subcategory_id}`,
+			path: `/categories/${category.store_category_id}/${subcategory.store_subcategory_id}`,
 		},
 	];
 	return (
@@ -126,18 +123,12 @@ export default async function SubcategoryPage({
 							className='rounded-lg shadow relative overflow-clip aspect-square w-full shrink-0'
 							key={b}
 						>
-							{/* <Link
-								href={`/categories/${slugify(
-									params.category
-								)}/${slugify(
-									params.subcategory
-								)}/${slugify(a.name)}`}
-							> */}
 							<Link href={`/products/${a.product_id}`}>
 								<Image
 									src={
-										a.image
-											? a.image[0]
+										a.tbl_product_media
+											? a.tbl_product_media[0]
+													.media
 											: '/pph.jpg'
 									}
 									alt='Ariaria Fashion Image'

@@ -18,7 +18,7 @@ import {
 import { NextResponse } from 'next/server';
 
 const updateSubcategoriesFormSchema = z.object({
-	id: z.string(),
+	store_subcategory_id: z.string(),
 	title: z
 		.string({ required_error: 'Enter an title' })
 		.min(2, { message: 'Subcategory should be a valid word' }),
@@ -36,9 +36,9 @@ export default function UpdateSubcategoriesForm({
 }) {
 	const defaultValues: Partial<updateSubcategoriesFormValue> = {
 		title: subcategory?.title,
-		// description: subcategory?.description,
+		description: subcategory?.description,
 		image: subcategory?.image,
-		// id: subcategory?.store_subcategory_id,
+		store_subcategory_id: subcategory?.store_subcategory_id,
 	};
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -70,7 +70,7 @@ export default function UpdateSubcategoriesForm({
 						description: data.description,
 						title: data.title,
 						image: data.image,
-						id: data.id,
+						store_subcategory_id: data.store_subcategory_id,
 					}),
 				}
 			);

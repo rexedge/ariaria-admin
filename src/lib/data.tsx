@@ -353,7 +353,8 @@ export const SocialMedia: ISocialMediaProps[] = [
 		icon: <Icons.LinkedinIcon />,
 	},
 ];
-export const ALL_PRODUCTS: Partial<IStoreProduct>[] = [
+// export const ALL_PRODUCTS: Partial<IStoreProduct>[] = [
+export const ALL_PRODUCTS: Partial<any>[] = [
 	{
 		id: 0,
 		product_id: 'ghdb47-7848dbbdey-89874bdbhdb-hhgbdhfybe',
@@ -1708,7 +1709,7 @@ export const STATISTICS_DROPDOWN_ITEMS = [
 	{ label: 'Excel', href: '/', icon: <Icons.DownloadIcon /> },
 ];
 // API ENDPOINT URLS
-export const BASE_URL = 'https://lobster-app-wxw8t.ondigitalocean.app';
+export const BASE_URL = 'https://monolith.isce.app';
 export const ENDPOINTS = {
 	auth: {
 		login: '/api/stores/owner/login', // POST
@@ -1725,5 +1726,8 @@ export const ENDPOINTS = {
 	},
 	subcategories: {
 		all: '/api/stores/subcategory',
+	},
+	customers: {
+		all: '/api/stores/customer',
 	},
 };

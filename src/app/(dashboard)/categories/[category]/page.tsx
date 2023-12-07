@@ -86,7 +86,9 @@ export default async function CategoryPage({
 								href={`/categories/${category.store_category_id}/${a.store_subcategory_id}`}
 							>
 								<Image
-									src={a.image}
+									src={
+										a.image ? a.image : '/pph.jpg'
+									}
 									alt='Ariaria Fashion Image'
 									quality={100}
 									fill

@@ -19,7 +19,6 @@ import { getProducts } from '@/src/lib/controller/products-controller';
 
 export default async function ProductsPage() {
 	const products: IStoreProduct[] = await getProducts();
-	console.log(products);
 	const breadCrumbItems = [{ name: 'Products', path: '/products' }];
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
@@ -78,11 +77,12 @@ export default async function ProductsPage() {
 							className='rounded-lg shadow relative overflow-clip aspect-square w-full shrink-0'
 							key={b}
 						>
-							<Link href={`/products/${a.store_id}`}>
+							<Link href={`/products/${a.product_id}`}>
 								<Image
 									src={
-										a.image
-											? a.image[0]
+										a.tbl_product_media
+											? a.tbl_product_media[0]
+													.media
 											: '/pph.jpg'
 									}
 									alt='Ariaria Fashion Image'

@@ -1,8 +1,11 @@
-import { getProductById } from '@/src/app/api/products';
 import UpdateProductForm from '@/src/components/forms/update-product';
-import Image from 'next/image';
+import {
+	getCategories,
+	getSubcategoriesByCategoryId,
+} from '@/src/lib/controller/categories-controller';
+import { getProductById } from '@/src/lib/controller/products-controller';
+import { getSubcategoryById } from '@/src/lib/controller/subcategories-controller';
 import { notFound } from 'next/navigation';
-import React from 'react';
 
 export default async function UpdateProductPage({
 	params,
@@ -11,6 +14,11 @@ export default async function UpdateProductPage({
 }) {
 	const product = await getProductById(params.product);
 	if (!product) return notFound();
+	const categories = await getCategories();
+	const subcategory = await getSubcategoryById(product.subcategory_id);
+	const subcategories = await getSubcategoriesByCategoryId(
+		product.category_id
+	);
 	return (
 		<div className='min-h-[80svh] xl:p-5 flex flex-col gap-5'>
 			<div className='flex items-center justify-between'>
@@ -19,21 +27,12 @@ export default async function UpdateProductPage({
 				</div>
 			</div>
 			<div className='grid lg:grid-cols-2 gap-5 lg:gap-20 xl:gap-32'>
-				<div className=''>
-					<UpdateProductForm product={product} />
-				</div>
-				<div className='w-full aspect-[5/6] rounded-lg shadow relative overflow-clip'>
-					<div className='text-primary text-xs lg:text-sm absolute flex items-center justify-center p-1 px-2 h-8 w-fit top-0 left-0 bg-white rounded-br-xl shadow hover:shadow-lg transition-all duration-500'>
-						{product?.category}
-					</div>
-					{/* <Image
-						src={product?.image[0]}
-						alt=''
-						height={200}
-						width={1200}
-						className='h-full w-full object-cover object-center'
-					/> */}
-				</div>
+				<UpdateProductForm
+					product={product}
+					categories={categories}
+					subcategory={subcategory}
+					iSubcategories={subcategories}
+				/>
 			</div>
 		</div>
 	);
