@@ -123,7 +123,7 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 		<>
 			<div>
 				<div>
-					<div className='grid grid-cols-3 lg:grid-cols-5 gap-3 flex-wrap'>
+					<div className='grid grid-cols-3 lg:grid-cols-6 gap-3 flex-wrap'>
 						{imagePreviews.map((imageUrl, index) => (
 							<div
 								key={index}

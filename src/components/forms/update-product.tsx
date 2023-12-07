@@ -46,7 +46,7 @@ const updateProductFormSchema = z.object({
 	price: z.string({ required_error: 'Add Price' }),
 	category_id: z.string({ required_error: 'select a category' }),
 	subcategory_id: z.string({ required_error: 'select a subcategory' }),
-	image: z.array(z.string({ required_error: 'Add at least 1 (one) Image' })),
+	media: z.array(z.string({ required_error: 'Add at least 1 (one) Image' })),
 	stock_option: z
 		.string({ required_error: 'Select stock option' })
 		.refine((value) => ['limited', 'unlimited'].includes(value), {
@@ -94,9 +94,7 @@ export default function UpdateProductForm({
 		price: product.price.toString(),
 		category_id: product.category_id,
 		subcategory_id: product.subcategory_id,
-		image: [
-			'https://isce-image.fra1.cdn.digitaloceanspaces.com/ariaria-products/ariaria-46bd8827-63f6-418e-b293-bdc96509fb77-ariaria-products',
-		],
+		media: product.tbl_product_media.map((a) => a.media),
 		// image: [`/${product.image}`],
 		stock_option: product.stock_option,
 		stock_value: product.stock_value?.toString(),
@@ -139,7 +137,7 @@ export default function UpdateProductForm({
 	const handleStockOptionChange = async (categoryId: string) => {};
 	const handleFiles = (newImages: string[]) => {
 		// const urlArray: string[] = newImages.map((image) => image.url);
-		form.setValue('image', newImages);
+		form.setValue('media', newImages);
 		console.log(newImages);
 	};
 
@@ -180,7 +178,7 @@ export default function UpdateProductForm({
 						status: data.status,
 						stock_value: data.stock_value,
 						tags: data.tags,
-						images: data.image,
+						media: data.media,
 						product_id: data.product_id,
 					}),
 				}
@@ -525,7 +523,7 @@ export default function UpdateProductForm({
 					/>
 					<FormField
 						control={form.control}
-						name='image'
+						name='media'
 						render={({ field }) => (
 							<FormItem>
 								<FormControl>
