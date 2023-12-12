@@ -31,11 +31,6 @@ export const getSubcategoriesByCategoryId = async (id: string) => {
 	});
 	const subcategoryResponse: ISubcategoriesRes =
 		await allSubcategoriesReq.json();
-	console.log({
-		HEADERS: headers,
-		SUBCATEGORY: subcategoryResponse,
-	});
 	const c = subcategoryResponse.data.category.tbl_store_subcategories;
-	console.log(c);
 	return c;
 };

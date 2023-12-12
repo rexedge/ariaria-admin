@@ -168,7 +168,7 @@ interface IUser {
 }
 
 interface ICategory {
-	id: 5;
+	id: number;
 	store_category_id: string;
 	store_id: string;
 	title: string;

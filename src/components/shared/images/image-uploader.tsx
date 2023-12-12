@@ -148,7 +148,7 @@ const MultipleImagesUploader: React.FC<MultipleImagesUploaderProps> = (
 										);
 										props.handleFiles(
 											newInitialImages
-										); // Notify parent component
+										);
 									}}
 									className='absolute top-0 left-0 p-1 text-primary bg-white rounded-br-xl cursor-pointer'
 								>
