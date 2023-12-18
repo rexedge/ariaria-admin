@@ -24,6 +24,7 @@ const updateCategoriesFormSchema = z.object({
 		.min(2, { message: 'Category should be a valid word' }),
 	description: z.string(),
 	image: z.string({ required_error: 'select an image' }),
+	deleted: z.boolean(),
 });
 export type updateCategoriesFormValue = z.infer<
 	typeof updateCategoriesFormSchema
@@ -39,6 +40,7 @@ export default function UpdateCategoriesForm({
 		description: category?.description,
 		image: category?.image,
 		store_category_id: category?.store_category_id,
+		deleted: false,
 	};
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -70,6 +72,7 @@ export default function UpdateCategoriesForm({
 						title: data.title,
 						image: data.image,
 						store_category_id: data.store_category_id,
+						deleted: data.deleted,
 					}),
 				}
 			);

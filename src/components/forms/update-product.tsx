@@ -95,7 +95,6 @@ export default function UpdateProductForm({
 		category_id: product.category_id,
 		subcategory_id: product.subcategory_id,
 		media: product.tbl_product_media.map((a) => a.media),
-		// image: [`/${product.image}`],
 		stock_option: product.stock_option,
 		stock_value: product.stock_value?.toString(),
 		type: product.type,
@@ -184,10 +183,7 @@ export default function UpdateProductForm({
 				}
 			);
 			const productResponse = await updateProductResponse.json();
-			if (
-				productResponse.status > 199 &&
-				productResponse.status < 299
-			) {
+			if (productResponse.success) {
 				toast.success('Product updated successfully');
 				setIsLoading(false);
 				router.refresh();

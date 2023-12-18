@@ -44,7 +44,7 @@ export async function PUT(req: NextRequest) {
 
 	try {
 		const url = `${BASE_URL}${ENDPOINTS.products.all}/${body.product_id}`;
-		console.log({ URL: url, PAYLOAD: body });
+		console.log({ URL: url, PAYLOAD: body, headers });
 		const response = await fetch(url, {
 			method: 'PUT',
 			headers,
@@ -52,7 +52,6 @@ export async function PUT(req: NextRequest) {
 		});
 		const result = await response.json();
 		if (!result.success) {
-			// throw new Error(`Something Went wrong ${response.statusText}`);
 			return NextResponse.json(result);
 		} else {
 			return NextResponse.json(result);

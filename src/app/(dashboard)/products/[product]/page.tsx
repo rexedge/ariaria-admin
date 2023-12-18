@@ -1,6 +1,7 @@
 // import { getProductById } from '@/app/api/products';
 import Breadcrumb from '@/src/components/layout/breadcrumb';
 import DeleteCategory from '@/src/components/pages/admin/delete-category';
+import DeleteProduct from '@/src/components/pages/admin/delete-product';
 import { Button } from '@/src/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/src/components/ui/scroll-area';
 import { getCategoryById } from '@/src/lib/controller/categories-controller';
@@ -54,7 +55,7 @@ export default async function ProductPage({
 							Edit
 						</Link>
 					</Button>
-					<DeleteCategory />
+					<DeleteProduct product={product} />
 				</div>
 			</div>
 			<div className='flex flex-col gap-5'>

@@ -1,7 +1,8 @@
-import NewCategoriesForm from '@/src/components/forms/add-categories-form';
+'use client';
 import { Button } from '@/src/components/ui/button';
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -10,9 +11,52 @@ import {
 } from '@/src/components/ui/dialog';
 import { TrashIcon } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function DeleteCategory({ category }: { category?: ICategory }) {
+	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+	const handleCategoryDelete = async () => {
+		try {
+			setIsLoading(true);
+			toast.promise(
+				async () => {
+					const deleteCategoryRequest = await fetch(
+						'/api/category/delete',
+						{
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({
+								store_category_id:
+									category?.store_category_id,
+								deleted: true,
+							}),
+						}
+					);
+					const deleteCategoryResponse =
+						await deleteCategoryRequest.json();
+					console.log({ CLIENT: deleteCategoryResponse });
+					if (!deleteCategoryResponse.success) {
+						setIsLoading(false);
+						throw new Error(deleteCategoryResponse.message);
+					}
+					router.refresh();
+					setIsLoading(false);
+					return deleteCategoryResponse;
+				},
+				{
+					loading: 'Deleting category...',
+					success: 'Category deleted!',
+					error: 'Error deleting category',
+				}
+			);
+		} catch (error) {}
+	};
+
 	return (
 		<Dialog>
 			<DialogTrigger className='flex px-2 py-1.5 items-center w-full text-sm text-destructive'>
@@ -48,9 +92,15 @@ export default function DeleteCategory({ category }: { category?: ICategory }) {
 								category?
 							</p>
 						</div>
-						<Button variant={'destructive'}>
-							Delete Category
-						</Button>
+						<DialogClose asChild>
+							<Button
+								onClick={handleCategoryDelete}
+								variant={'destructive'}
+								disabled={isLoading}
+							>
+								Delete Category
+							</Button>
+						</DialogClose>
 					</DialogDescription>
 				</DialogHeader>
 			</DialogContent>

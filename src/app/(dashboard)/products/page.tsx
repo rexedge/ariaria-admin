@@ -80,7 +80,8 @@ export default async function ProductsPage() {
 							<Link href={`/products/${a.product_id}`}>
 								<Image
 									src={
-										a.tbl_product_media
+										a.tbl_product_media &&
+										a.tbl_product_media.length > 0
 											? a.tbl_product_media[0]
 													.media
 											: '/pph.jpg'
@@ -106,9 +107,7 @@ export default async function ProductsPage() {
 								>
 									<DropdownMenuItem asChild>
 										<Link
-											href={`/products/${slugify(
-												a.name
-											)}/edit`}
+											href={`/products/${a.product_id}/edit`}
 										>
 											<EditIcon className='mr-2 h-4 w-4' />
 											<span>Edit</span>

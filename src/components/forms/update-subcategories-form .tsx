@@ -24,6 +24,7 @@ const updateSubcategoriesFormSchema = z.object({
 		.min(2, { message: 'Subcategory should be a valid word' }),
 	description: z.string(),
 	image: z.string({ required_error: 'select an image' }),
+	deleted: z.boolean(),
 });
 export type updateSubcategoriesFormValue = z.infer<
 	typeof updateSubcategoriesFormSchema
@@ -39,6 +40,7 @@ export default function UpdateSubcategoriesForm({
 		description: subcategory?.description,
 		image: subcategory?.image,
 		store_subcategory_id: subcategory?.store_subcategory_id,
+		deleted: false,
 	};
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -71,6 +73,7 @@ export default function UpdateSubcategoriesForm({
 						title: data.title,
 						image: data.image,
 						store_subcategory_id: data.store_subcategory_id,
+						deleted: data.deleted,
 					}),
 				}
 			);

@@ -1,7 +1,8 @@
-import NewCategoriesForm from '@/src/components/forms/add-categories-form';
+'use client';
 import { Button } from '@/src/components/ui/button';
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -10,13 +11,60 @@ import {
 } from '@/src/components/ui/dialog';
 import { TrashIcon } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function DeleteSubcategory({
 	subcategory,
 }: {
 	subcategory?: ISubcategory;
 }) {
+	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+	const handleSubcategoryDelete = async () => {
+		try {
+			setIsLoading(true);
+			toast.promise(
+				async () => {
+					const deleteSubcategoryRequest = await fetch(
+						'/api/subcategory/delete',
+						{
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({
+								store_subcategory_id:
+									subcategory?.store_subcategory_id,
+								deleted: true,
+							}),
+						}
+					);
+					const deleteSubcategoryResponse =
+						await deleteSubcategoryRequest.json();
+					console.log({ CLIENT: deleteSubcategoryResponse });
+					if (!deleteSubcategoryResponse.success) {
+						setIsLoading(false);
+						// toast.error(`Subcategory not deleted!`);
+						throw new Error(
+							deleteSubcategoryResponse.message
+						);
+					}
+					router.refresh();
+					// toast.success(`Subcategory deleted!`);
+					setIsLoading(false);
+					return deleteSubcategoryResponse;
+				},
+				{
+					loading: 'Deleting subcategory...',
+					success: 'Subcategory deleted!',
+					error: 'Error deleting subcategory',
+				}
+			);
+		} catch (error) {}
+	};
+
 	return (
 		<Dialog>
 			<DialogTrigger className='flex px-2 py-1.5 items-center w-full text-sm text-destructive'>
@@ -53,9 +101,15 @@ export default function DeleteSubcategory({
 								subcategory?
 							</p>
 						</div>
-						<Button variant={'destructive'}>
-							Delete Subcategory
-						</Button>
+						<DialogClose asChild>
+							<Button
+								onClick={handleSubcategoryDelete}
+								disabled={isLoading}
+								variant={'destructive'}
+							>
+								Delete Subcategory
+							</Button>
+						</DialogClose>
 					</DialogDescription>
 				</DialogHeader>
 			</DialogContent>
