@@ -46,13 +46,12 @@ export default function DeleteSubcategory({
 					console.log({ CLIENT: deleteSubcategoryResponse });
 					if (!deleteSubcategoryResponse.success) {
 						setIsLoading(false);
-						// toast.error(`Subcategory not deleted!`);
 						throw new Error(
 							deleteSubcategoryResponse.message
 						);
 					}
 					router.refresh();
-					// toast.success(`Subcategory deleted!`);
+					router.push(`/categories/${subcategory?.category_id}`);
 					setIsLoading(false);
 					return deleteSubcategoryResponse;
 				},

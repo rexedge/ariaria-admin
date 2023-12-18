@@ -45,11 +45,10 @@ export default function DeleteProduct({
 					console.log({ CLIENT: deleteProductResponse });
 					if (!deleteProductResponse.success) {
 						setIsLoading(false);
-						// toast.error(`Product not deleted!`);
 						throw new Error(deleteProductResponse.message);
 					}
 					router.refresh();
-					// toast.success(`Product deleted!`);
+					router.push('/products');
 					setIsLoading(false);
 					return deleteProductResponse;
 				},
@@ -78,8 +77,13 @@ export default function DeleteProduct({
 							<div className='h-52 w-full overflow-clip rounded-2xl mb-2'>
 								<Image
 									src={
-										product?.tbl_product_media[0]
-											.media || '/nike.png'
+										product?.tbl_product_media &&
+										product?.tbl_product_media
+											.length > 0
+											? product
+													?.tbl_product_media[0]
+													.media
+											: '/nike.png'
 									}
 									alt=''
 									quality={100}

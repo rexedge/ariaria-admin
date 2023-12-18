@@ -45,6 +45,7 @@ export default function DeleteCategory({ category }: { category?: ICategory }) {
 						throw new Error(deleteCategoryResponse.message);
 					}
 					router.refresh();
+					router.push('/categories');
 					setIsLoading(false);
 					return deleteCategoryResponse;
 				},
