@@ -16,6 +16,7 @@ import { slugify } from '@/src/lib/utils';
 import { Button } from '@/src/components/ui/button';
 import { EditIcon, PlusIcon, TrashIcon } from 'lucide-react';
 import { getProducts } from '@/src/lib/controller/products-controller';
+import DeleteProduct from '@/src/components/pages/admin/delete-product';
 
 export default async function ProductsPage() {
 	const products: IStoreProduct[] = await getProducts();
@@ -113,9 +114,11 @@ export default async function ProductsPage() {
 											<span>Edit</span>
 										</Link>
 									</DropdownMenuItem>
-									<DropdownMenuItem className='text-destructive '>
-										<TrashIcon className='mr-2 h-4 w-4' />
-										<span>Delete</span>
+									<DropdownMenuItem
+										asChild
+										className='text-destructive '
+									>
+										<DeleteProduct product={a} />
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
