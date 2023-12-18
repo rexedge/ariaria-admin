@@ -1,4 +1,3 @@
-import { addCategoriesFormValue } from '@/src/components/forms/add-categories-form';
 import { updateCategoriesFormValue } from '@/src/components/forms/update-categories-form ';
 import { getSSession } from '@/src/lib/controller/session-controller';
 import { BASE_URL, ENDPOINTS } from '@/src/lib/data';

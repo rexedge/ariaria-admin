@@ -2,6 +2,7 @@
 import { Button } from '@/src/components/ui/button';
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -10,13 +11,57 @@ import {
 } from '@/src/components/ui/dialog';
 import { TrashIcon } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function DeleteProduct({
 	product,
 }: {
 	product?: IStoreProduct;
 }) {
+	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+	const handleProductDelete = async () => {
+		try {
+			setIsLoading(true);
+			toast.promise(
+				async () => {
+					const deleteProductRequest = await fetch(
+						'/api/product/delete',
+						{
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({
+								product_id: product?.product_id,
+								deleted: true,
+							}),
+						}
+					);
+					const deleteProductResponse =
+						await deleteProductRequest.json();
+					console.log({ CLIENT: deleteProductResponse });
+					if (!deleteProductResponse.success) {
+						setIsLoading(false);
+						// toast.error(`Product not deleted!`);
+						throw new Error(deleteProductResponse.message);
+					}
+					router.refresh();
+					// toast.success(`Product deleted!`);
+					setIsLoading(false);
+					return deleteProductResponse;
+				},
+				{
+					loading: 'Deleting product...',
+					success: 'Product deleted!',
+					error: 'Error deleting product',
+				}
+			);
+		} catch (error) {}
+	};
+
 	return (
 		<Dialog>
 			<DialogTrigger className='flex px-2 py-1.5 items-center w-full text-sm text-destructive'>
@@ -53,9 +98,15 @@ export default function DeleteProduct({
 								product?
 							</p>
 						</div>
-						<Button variant={'destructive'}>
-							Delete Product
-						</Button>
+						<DialogClose asChild>
+							<Button
+								onClick={handleProductDelete}
+								disabled={isLoading}
+								variant={'destructive'}
+							>
+								Delete Product
+							</Button>
+						</DialogClose>
 					</DialogDescription>
 				</DialogHeader>
 			</DialogContent>

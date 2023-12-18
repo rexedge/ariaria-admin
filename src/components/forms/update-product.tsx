@@ -71,6 +71,7 @@ const updateProductFormSchema = z.object({
 				message: 'Invalid Status',
 			}
 		),
+	deleted: z.boolean(),
 });
 
 export type updateProductFormValue = z.infer<typeof updateProductFormSchema>;
@@ -100,6 +101,7 @@ export default function UpdateProductForm({
 		type: product.type,
 		tags: initialTags,
 		status: product.status,
+		deleted: false,
 	};
 
 	const form = useForm<updateProductFormValue>({
@@ -152,12 +154,6 @@ export default function UpdateProductForm({
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 	const router = useRouter();
 
-	console.log({
-		SUBCATEGORIES_ALL: subcategories,
-		SINGLE_SUBCATEGORY: selectedSubcategory,
-		PRODUCT: product,
-	});
-
 	async function onSubmit(data: updateProductFormValue) {
 		setIsLoading(true);
 		try {
@@ -179,6 +175,7 @@ export default function UpdateProductForm({
 						tags: data.tags,
 						media: data.media,
 						product_id: data.product_id,
+						deleted: data.deleted,
 					}),
 				}
 			);
